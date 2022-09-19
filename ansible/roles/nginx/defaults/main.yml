@@ -1,0 +1,24 @@
+---
+enable_php: false
+
+ssl_certificate_directory: /etc/ssl
+ssl_certificate_name: star_cert
+
+self_certificates: false
+
+gateway_timeout_seconds: 120
+
+
+## Self Signed Certs
+certificate_directory: /etc/ssl
+certificate_name: star_cert
+root_ca_name: rootCA
+certificate_length: 3650
+certificate_owner: root
+certificate_group: root
+
+country: US
+state: Indiana
+city: Indianapolis
+organization: GG Test
+common_name: "*.gg.test"

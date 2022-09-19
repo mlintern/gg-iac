@@ -1,0 +1,43 @@
+---
+- hosts: "{{ name }}"
+  remote_user: ubuntu
+  become: true
+  collections:
+    - devsec.hardening
+  roles:
+    - ssh_hardening
+
+  vars:
+    name: lab
+
+  tasks:
+    - name: Set hostname to server
+      include_role:
+        name: host-management
+      vars:
+        hosts_additional_hosts:
+          - address: 127.0.0.1
+            hostnames:
+              - "{{ name }}.gg.test"
+
+    - include: plays/profile.yml
+
+    - name: Install Nginx
+      include_role:
+        name: nginx
+      vars:
+        gg_ondisk_sites:
+          - listen_port: 443
+            root: /var/www/html
+            location: /
+            server_name: maintenance.greenlight.guru
+            custom_additions: |
+              rewrite ^\/.+$ /index.html last;
+
+    - name: Add Index For Maintenance Page
+      copy:
+        src: ../config/index.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644

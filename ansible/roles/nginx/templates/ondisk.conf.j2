@@ -1,0 +1,33 @@
+# Ansible Managed
+# gg.nginx role
+
+{% for dir in directories %}
+server {
+  listen {{ dir.listen_port | default(443) }};
+
+  ssl {{ proxy.ssl | default('on') }};
+
+  client_max_body_size 265M;
+
+  ssl_certificate {{ ssl_certificate_directory }}/{{ ssl_certificate_name }}.crt;
+  ssl_certificate_key {{ ssl_certificate_directory }}/{{ ssl_certificate_name }}.key;
+
+  server_name {{ dir.server_name | default("default.greenlight.guru") }};
+
+  root {{ dir.root | default("/var/www/html") }};
+  index index.php index.html;
+
+  location {{ dir.location | default("/") }} {
+    try_files $uri $uri/ =404;
+  }
+  {% if enable_php %}
+  # pass PHP scripts to FastCGI server
+  location ~ \.php$ {
+    include snippets/fastcgi-php.conf;
+    fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+  }
+  {% endif %}
+  {{ dir.custom_additions | default("") }}
+}
+
+{% endfor %}

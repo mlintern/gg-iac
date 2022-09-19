@@ -1,0 +1,80 @@
+---
+- include: self_certs.yml
+  when: self_certificates
+
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Remove default site config
+  file:
+    path: "/etc/nginx/sites-enabled/default"
+    state: absent
+
+- name: Add gg-nginx.config
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/conf.d/gg-nginx.conf
+  notify:
+    - restart nginx
+
+- include: php.yml
+  when: enable_php
+
+- debug:
+    msg: "ATTN: There will be no local proxies created."
+  when: item not in vars
+  with_items:
+    - gg_local_proxies
+
+- name: Add Local Proxy Configuration
+  template:
+    src: proxy.conf.j2
+    dest: /etc/nginx/sites-enabled/gg-local-proxy
+    owner: root
+    group: root
+  vars:
+    proxies: "{{ gg_local_proxies | default([]) }}"
+  notify:
+    - restart nginx
+
+- debug:
+    msg: "ATTN: There will be no proxies created."
+  when: item not in vars
+  with_items:
+    - gg_proxies
+
+- name: Add Local Proxy Configuration
+  template:
+    src: proxy.conf.j2
+    dest: /etc/nginx/sites-enabled/gg-proxy
+    owner: root
+    group: root
+  vars:
+    proxies: "{{ gg_proxies | default([]) }}"
+  notify:
+    - restart nginx
+
+- debug:
+    msg: "ATTN: There will be no on disk sites created."
+  when: item not in vars
+  with_items:
+    - gg_ondisk_sites
+
+- name: Add Local On Disk Configuration
+  template:
+    src: ondisk.conf.j2
+    dest: /etc/nginx/sites-enabled/gg-ondisk
+    owner: root
+    group: root
+  vars:
+    directories: "{{ gg_ondisk_sites | default([]) }}"
+  notify:
+    - restart nginx
+
+- name: Start and Enable Nginx
+  systemd:
+    name: nginx
+    state: started
+    enabled: true

@@ -12,3 +12,8 @@ variable "subnet_id" {
   type        = string
   description = "subnet id instace will be created in"
 }
+
+variable "profile" {
+  type        = string
+  description = "value"
+}

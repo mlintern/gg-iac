@@ -2,8 +2,9 @@ module "mystery_1" {
   source = "./modules/mystery_1"
 
   name                   = "lab"
-  vpc_security_group_ids = []
-  subnet_id              = ""
+  vpc_security_group_ids = ["sg-0f3c2e991b1df4ed1"]
+  subnet_id              = "subnet-0d075ecb98cb83e28"
+  profile                = aws_iam_instance_profile.ec2_profile.name
 }
 
 module "mystery_2" {
