@@ -46,12 +46,12 @@ variable "engine_mode" {
 variable "engine_version" {
   type        = string
   description = <<EOF
-The database engine version. Updating this argument results in an outage. 
+The database engine version. Updating this argument results in an outage.
 See the https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Updates.html and https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.Updates.html
-documentation for your configured engine to determine this value. 
+documentation for your configured engine to determine this value.
 
-For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2. 
-The value can contain a partial version where supported by the API. 
+For example with Aurora MySQL 2, a potential value for this argument is 5.7.mysql_aurora.2.03.2.
+The value can contain a partial version where supported by the API.
 
 The actual engine version used is returned in the attribute engine_version_actual
 EOF

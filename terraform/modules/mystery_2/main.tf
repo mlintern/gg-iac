@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "this" {
-  bucket = var.bucket_name
+  bucket = var.name
 
   tags = var.tags
 }
@@ -56,7 +56,7 @@ resource "aws_s3_bucket_policy" "this" {
 
   policy = jsonencode({
     "Version" : "2012-10-17",
-    "Id" : "${var.bucket_name}-access-policy",
+    "Id" : "${var.name}-access-policy",
     "Statement" : [
       {
         "Sid" : "S3BucketAllow",
