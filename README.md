@@ -10,5 +10,5 @@ pip install -r requirements.txt
 ```
 
 ```
-OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES ANSIBLE_CONFIG=ansible.cfg ansible-playbook ./server.yml --diff
+OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES ANSIBLE_CONFIG=ansible.cfg ansible-playbook ./server.yml --extra-vars "server_name=lab" --diff
 ```
