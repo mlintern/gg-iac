@@ -1,6 +1,6 @@
 ---
 - hosts: "{{ server_name }}"
-  remote_user: ubuntu
+  remote_user: ssm-user
   become: true
   collections:
     - devsec.hardening
@@ -8,6 +8,11 @@
     - ssh_hardening
 
   tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      changed_when: False
+
     - name: Set hostname to server
       include_role:
         name: host-management
@@ -33,7 +38,7 @@
 
     - name: Add Index For Maintenance Page
       copy:
-        src: ../config/index.html
+        src: config/index.html
         dest: /var/www/html/index.html
         owner: root
         group: root
