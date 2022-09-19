@@ -1,10 +1,10 @@
 ---
 - name: Add Aliases
-  template:
-    src: ../config/aliases.sh.j2
+  ansible.builtin.copy:
+    src: ../config/aliases.sh
     dest: /etc/profile.d/my-aliases.sh
 
 - name: Add PS1
-  template:
+  ansible.builtin.template:
     src: ../config/ps1.sh.j2
     dest: /etc/profile.d/my-ps1.sh

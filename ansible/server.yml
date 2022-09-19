@@ -7,6 +7,9 @@
   roles:
     - ssh_hardening
 
+  vars:
+    ps1_message: "Pay Attn"
+
   tasks:
     - name: Update apt cache
       apt:

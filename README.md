@@ -9,6 +9,14 @@ source /var/tmp/gg-iac/bin/activate
 pip install -r requirements.txt
 ```
 
+### Ansible Requirements
+
+```
+/var/tmp/gg-iac/bin/ansible-galaxy install -r requirements.yml
+```
+
+### Ansible Run
+
 ```
 OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES ANSIBLE_CONFIG=ansible.cfg ansible-playbook ./server.yml --extra-vars "server_name=lab" --diff
 ```
