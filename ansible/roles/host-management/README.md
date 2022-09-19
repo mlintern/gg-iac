@@ -39,7 +39,7 @@ Including an example of how to use your role (for instance, with variables passe
   tasks:
     - name: Setup and Update Hostname and Hosts file
       include_role:
-        name: gg.host-management
+        name: host-management
       vars:
         hosts_additional_hosts:
           - address: 192.168.0.1

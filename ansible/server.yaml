@@ -13,7 +13,7 @@
   tasks:
     - name: Set hostname to server
       include_role:
-        name: gg.host-management
+        name: host-management
       vars:
         hosts_additional_hosts:
           - address: 127.0.0.1
