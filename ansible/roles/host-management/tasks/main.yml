@@ -1,6 +1,6 @@
 ---
 - name: Set up /etc/hostname
-  template:
+  ansible.builtin.template:
     src: hostname.j2
     dest: /etc/hostname
     owner: root
@@ -8,7 +8,7 @@
     mode: 0644
 
 - name: Set up /etc/hosts
-  template:
+  ansible.builtin.template:
     src: hosts.j2
     dest: "{{ hosts_file_location }}"
     owner: root
@@ -17,5 +17,5 @@
     backup: true
 
 - name: Set hostname
-  hostname:
+  ansible.builtin.hostname:
     name: "{{ inventory_hostname }}"
