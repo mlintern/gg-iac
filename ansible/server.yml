@@ -32,9 +32,10 @@
           - listen_port: 443
             root: /var/www/html
             location: /
-            server_name: maintenance.greenlight.guru
+            server_name: maintenance.gg.test
             custom_additions: |
               rewrite ^\/.+$ /index.html last;
+        self_certificates: true
 
     - name: Add Index For Maintenance Page
       copy:
