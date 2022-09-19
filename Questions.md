@@ -1,24 +1,36 @@
 # Questions
 
-## Terraform
+## General Ansible
 
-- Where would you look to find out what outputs exist from
+- Can you walk me through the server.yml file?
+- Can you tell me what roles are and when they make sense to use?
 
-### Module 1
+### profile.yml
 
-- What does the lifecycle do and why is it useful?  What would happen if it was not there?
-- How would you change this module to make it better?
+- What is the difference between copy and template?
 
-### Module 2
+### Nginx Role
+
+- Which tasks are optional?
+    - Which optional tasks are executed in this case?
+
+## General Terraform
+
+- Where would you look to find out what outputs are available from a terraform VPC?
+- What are providers used for?
+
+### Mystery Module 1
+
+- What does the lifecycle do and why is it useful?
+    - What would happen if it was not there?
+- How would you change this module to make it more useful?
+
+### Mystery Module 2
 
 - How would you change the expiration date to 30 days?
 - Which of the elements in the main.tf file are optional?
 
-### Module 3
+### Mystery Module 3
 
-- What is being created?
-
-
-## Ansible
-
-- Can you walk me through the server.yml file?
+- What exactly is being created?
+- How would I update to make it Highly Available?
