@@ -1,9 +1,14 @@
 # Questions
 
+## General IaC
+
+- Can you tell me about mutability in IaC?
+    - How does that relate to Ansible and Terraform?
+
 ## General Ansible
 
-- Can you walk me through the server.yml file?
 - Can you tell me what roles are and when they make sense to use?
+- Can you walk me through the server.yml file?
 
 ### profile.yml
 
@@ -18,6 +23,7 @@
 
 - Where would you look to find out what outputs are available from a terraform VPC?
 - What are providers used for?
+- Can you walk me through the modules and what they do?
 
 ### Mystery Module 1
 
