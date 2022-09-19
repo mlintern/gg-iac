@@ -1,10 +1,10 @@
 ---
 - name: Add Aliases
   template:
-    src: ../gg-config/gg-aliases.sh.j2
-    dest: /etc/profile.d/gg-aliases.sh
+    src: ../config/aliases.sh.j2
+    dest: /etc/profile.d/my-aliases.sh
 
 - name: Add PS1
   template:
-    src: ../gg-config/gg-ps1.sh.j2
-    dest: /etc/profile.d/gg-ps1.sh
+    src: ../config/ps1.sh.j2
+    dest: /etc/profile.d/my-ps1.sh
