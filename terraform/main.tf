@@ -1,9 +1,9 @@
 module "mystery_1" {
   source = "./modules/mystery_1"
 
-  name = "lab"
+  name                   = "lab"
   vpc_security_group_ids = []
-  subnet_id = ""
+  subnet_id              = ""
 }
 
 module "mystery_2" {
@@ -15,9 +15,9 @@ module "mystery_2" {
 module "mystery_3" {
   source = "./modules/mystery_3"
 
-  name = "gg-iac"
+  name            = "gg-iac"
   master_username = "gg-iac-admin"
   master_password = "not_a_real_pass"
-  engine_version = "14"
+  engine_version  = "14"
   initial_db_name = "gg-iac"
 }
