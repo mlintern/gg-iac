@@ -10,7 +10,8 @@ module "mystery_1" {
 module "mystery_2" {
   source = "./modules/mystery_2"
 
-  name = "pail"
+  name                    = "fancy-pail"
+  bucket_access_principal = { "AWS" : [aws_iam_role.ec2_profile.arn] }
 }
 
 module "mystery_3" {
