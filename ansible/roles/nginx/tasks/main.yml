@@ -22,7 +22,7 @@
 - import_tasks: php.yml
   when: enable_php
 
-- debug:
+- ansible.builtin.debug:
     msg: "ATTN: There will be no local proxies created."
   when: item not in vars
   with_items:
@@ -39,7 +39,7 @@
   notify:
     - restart nginx
 
-- debug:
+- ansible.builtin.debug:
     msg: "ATTN: There will be no proxies created."
   when: item not in vars
   with_items:
@@ -57,7 +57,7 @@
   notify:
     - restart nginx
 
-- debug:
+- ansible.builtin.debug:
     msg: "ATTN: There will be no on disk sites created."
   when: item not in vars
   with_items:
@@ -69,6 +69,7 @@
     dest: /etc/nginx/sites-enabled/gg-ondisk
     owner: root
     group: root
+    mode: 0644
   vars:
     directories: "{{ gg_ondisk_sites | default([]) }}"
   notify:

@@ -18,7 +18,7 @@
 
     - name: Set hostname to server
       include_role:
-        name: host-management
+        name: host_management
       vars:
         hosts_additional_hosts:
           - address: 127.0.0.1

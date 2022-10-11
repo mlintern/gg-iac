@@ -22,14 +22,14 @@
     mode: 0644
 
 # openssl genrsa -out {{ root_ca_name }}.key 2048
-- name: Create a RSA Private Key {{ root_ca_name }}.key
+- name: Create a RSA Private Key {{ root_ca_name }}
   ansible.builtin.shell: "openssl genrsa -out {{ root_ca_name }}.key 2048"
   args:
     chdir: "{{ certificate_directory }}"
     creates: "{{ root_ca_name }}.key"
 
 # openssl req -x509 -config ssl.conf -new -nodes -key {{ root_ca_name }}.key -sha256 -days 3650 -out {{ root_ca_name }}.crt
-- name: Create a Certificate {{ root_ca_name }}.crt
+- name: Create a Certificate {{ root_ca_name }}
   ansible.builtin.shell: "openssl req -x509 -config ssl.conf -new -nodes -key {{ root_ca_name }}.key -sha256 -days {{ certificate_length }} -out {{ root_ca_name }}.crt"
   args:
     chdir: "{{ certificate_directory }}"
