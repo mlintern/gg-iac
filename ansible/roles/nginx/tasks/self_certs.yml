@@ -51,7 +51,9 @@
 
 # openssl x509 -in {{ root_ca_name }}.crt -text -noout -serial | grep 'serial' >> secret/serial
 - name: Create a serial File
-  ansible.builtin.shell: "openssl x509 -in {{ root_ca_name }}.crt -text -noout -serial | grep 'serial' >> serial"
+  ansible.builtin.shell: |
+    set -o pipefail
+    openssl x509 -in {{ root_ca_name }}.crt -text -noout -serial | grep 'serial' >> serial
   args:
     chdir: "{{ certificate_directory }}"
     creates: "serial"
