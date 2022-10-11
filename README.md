@@ -1,4 +1,7 @@
 # gg-iac
+
+[![GitHub Super-Linter](https://github.com/mlintern/gg-iac/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
+
 Infrastructure as Code for Interviews
 
 ### Ansible Virtual Environment
