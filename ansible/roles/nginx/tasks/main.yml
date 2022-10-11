@@ -3,17 +3,17 @@
   when: self_certificates
 
 - name: Install Nginx
-  apt:
+  ansible.builtin.apt:
     name: nginx
     state: present
 
 - name: Remove default site config
-  file:
+  ansible.builtin.file:
     path: "/etc/nginx/sites-enabled/default"
     state: absent
 
 - name: Add gg-nginx.config
-  template:
+  ansible.builtin.template:
     src: nginx.conf.j2
     dest: /etc/nginx/conf.d/gg-nginx.conf
   notify:
