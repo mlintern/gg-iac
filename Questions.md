@@ -3,7 +3,7 @@
 ## General IaC
 
 - Can you tell me about mutability in IaC?
-    - How does that relate to Ansible and Terraform?
+  - How does that relate to Ansible and Terraform?
 
 ## General Ansible
 
@@ -17,7 +17,7 @@
 ### Nginx Role
 
 - Which tasks are optional?
-    - Which optional tasks are executed in this case?
+  - Which optional tasks are executed in this case?
 
 ## General Terraform
 
@@ -28,7 +28,7 @@
 ### Mystery Module 1
 
 - What does the lifecycle do and why is it useful?
-    - What would happen if it was not there?
+  - What would happen if it was not there?
 - How would you change this module to make it more useful?
 
 ### Mystery Module 2

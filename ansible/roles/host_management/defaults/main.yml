@@ -16,7 +16,7 @@ hosts_default_hosts:
   - "{{ hosts_ipv4_loopback_hosts }}"
   - "{{ hosts_default_ipv4_hosts }}"
 
-hosts_additional_hosts: []
+hosts_additional_hosts: [ ]
 
 hosts_all_hosts: "{{ hosts_default_hosts | union(hosts_additional_hosts) }}"
 

@@ -3,7 +3,7 @@
 
 A simple role to install nginx as a proxy
 
-```
+```yaml
 - name: Install Nginx
   include_role:
     name: gg.nginx

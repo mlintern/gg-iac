@@ -1,10 +1,11 @@
-Hosts
+# Hosts Management
+
 =========
 
 This role manages /etc/hosts and /etc/hostname. The files are managed with a
 template.
 
-Role Variables
+## Role Variables
 --------------
 
 Each entry is described by a dictionary with the keys "address" which contains
@@ -29,12 +30,12 @@ Empty by default.
 hosts_all_hosts: List of all host entries. Just merges hosts_default_hosts and
 hosts_additional_hosts by default.
 
-Example Playbook
+## Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-```
+```yaml
 - hosts: servers
   tasks:
     - name: Setup and Update Hostname and Hosts file
