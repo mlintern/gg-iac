@@ -36,14 +36,14 @@
     creates: "{{ root_ca_name }}.crt"
 
 # openssl genrsa -out {{ certificate_name }}.key 2048
-- name: Create a RSA Private Key {{ certificate_name }}.key
+- name: Create a RSA Private Key {{ certificate_name }}
   ansible.builtin.shell: "openssl genrsa -out {{ certificate_name }}.key 2048"
   args:
     chdir: "{{ certificate_directory }}"
     creates: "{{ certificate_name }}.key"
 
 # openssl req -sha512 -new -key {{ certificate_name }}.key -out {{ certificate_name }}.csr -config ssl.conf
-- name: Create a Certificate Signing Request {{ certificate_name }}.csr
+- name: Create a Certificate Signing Request {{ certificate_name }}
   ansible.builtin.shell: "openssl req -config ssl.conf -sha512 -new -key {{ certificate_name }}.key -out {{ certificate_name }}.csr"
   args:
     chdir: "{{ certificate_directory }}"
@@ -64,7 +64,7 @@
     replace: ''
 
 # openssl x509 -days 3650 -req -sha512 -in {{ certificate_name }}.csr -CAserial serial -CA {{ root_ca_name }}.crt -CAkey {{ root_ca_name }}.key -out {{ certificate_name }}.crt -extfile ssl.conf
-- name: Create Star Cert {{ certificate_name }}.crt
+- name: Create Star Cert {{ certificate_name }}
   ansible.builtin.shell: "openssl x509 -days 3650 -req -sha512 -in {{ certificate_name }}.csr -CAserial serial -CA {{ root_ca_name }}.crt -CAkey {{ root_ca_name }}.key -out {{ certificate_name }}.crt -extfile ssl.conf"
   args:
     chdir: "{{ certificate_directory }}"

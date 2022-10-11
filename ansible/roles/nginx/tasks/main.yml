@@ -16,6 +16,7 @@
   ansible.builtin.template:
     src: nginx.conf.j2
     dest: /etc/nginx/conf.d/gg-nginx.conf
+    mode: 0644
   notify:
     - restart nginx
 
@@ -34,6 +35,7 @@
     dest: /etc/nginx/sites-enabled/gg-local-proxy
     owner: root
     group: root
+    mode: 0644
   vars:
     proxies: "{{ gg_local_proxies | default([]) }}"
   notify:
