@@ -12,7 +12,7 @@
 
   tasks:
     - name: Update apt cache
-      apt:
+      ansible.builtin.apt:
         update_cache: yes
       changed_when: False
 
@@ -25,7 +25,7 @@
             hostnames:
               - "{{ server_name }}.gg.test"
 
-    - include: plays/profile.yml
+    - import_tasks: plays/profile.yml
 
     - name: Install Nginx
       include_role:
@@ -41,7 +41,7 @@
         self_certificates: true
 
     - name: Add Index For Maintenance Page
-      copy:
+      ansible.builtin.copy:
         src: config/index.html
         dest: /var/www/html/index.html
         owner: root

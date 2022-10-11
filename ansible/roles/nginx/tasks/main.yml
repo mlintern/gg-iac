@@ -1,5 +1,5 @@
 ---
-- include: self_certs.yml
+- import_tasks: self_certs.yml
   when: self_certificates
 
 - name: Install Nginx
@@ -19,7 +19,7 @@
   notify:
     - restart nginx
 
-- include: php.yml
+- import_tasks: php.yml
   when: enable_php
 
 - debug:
@@ -29,7 +29,7 @@
     - gg_local_proxies
 
 - name: Add Local Proxy Configuration
-  template:
+  ansible.builtin.template:
     src: proxy.conf.j2
     dest: /etc/nginx/sites-enabled/gg-local-proxy
     owner: root
@@ -46,11 +46,12 @@
     - gg_proxies
 
 - name: Add Local Proxy Configuration
-  template:
+  ansible.builtin.template:
     src: proxy.conf.j2
     dest: /etc/nginx/sites-enabled/gg-proxy
     owner: root
     group: root
+    mode: 0644
   vars:
     proxies: "{{ gg_proxies | default([]) }}"
   notify:
@@ -63,7 +64,7 @@
     - gg_ondisk_sites
 
 - name: Add Local On Disk Configuration
-  template:
+  ansible.builtin.template:
     src: ondisk.conf.j2
     dest: /etc/nginx/sites-enabled/gg-ondisk
     owner: root
@@ -74,7 +75,7 @@
     - restart nginx
 
 - name: Start and Enable Nginx
-  systemd:
+  ansible.builtin.systemd:
     name: nginx
     state: started
     enabled: true

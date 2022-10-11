@@ -1,77 +1,77 @@
 ---
 - name: Ensure CA certificates are installed
-  apt:
+  ansible.builtin.apt:
     name: ca-certificates
     state: present
     update_cache: true
 
 - name: Ensure openssl exist
-  apt:
+  ansible.builtin.apt:
     name: ["openssl"]
 
 - name: Create Ownership Group
-  group:
+  ansible.builtin.group:
     name: "{{ certificate_group }}"
     state: present
 
 # echo -e "[req]\nprompt = no\ndistinguished_name = req_distinguished_name\n \n[req_distinguished_name]\nC = US\nST = Indiana\nL = Indianapolis\nO = GG" >> ssl.conf
 - name: Create SSL conf
-  template:
+  ansible.builtin.template:
     src: ssl.conf.j2
     dest: "{{ certificate_directory }}/ssl.conf"
     mode: 0644
 
 # openssl genrsa -out {{ root_ca_name }}.key 2048
 - name: Create a RSA Private Key {{ root_ca_name }}.key
-  shell: "openssl genrsa -out {{ root_ca_name }}.key 2048"
+  ansible.builtin.shell: "openssl genrsa -out {{ root_ca_name }}.key 2048"
   args:
     chdir: "{{ certificate_directory }}"
     creates: "{{ root_ca_name }}.key"
 
 # openssl req -x509 -config ssl.conf -new -nodes -key {{ root_ca_name }}.key -sha256 -days 3650 -out {{ root_ca_name }}.crt
 - name: Create a Certificate {{ root_ca_name }}.crt
-  shell: "openssl req -x509 -config ssl.conf -new -nodes -key {{ root_ca_name }}.key -sha256 -days {{ certificate_length }} -out {{ root_ca_name }}.crt"
+  ansible.builtin.shell: "openssl req -x509 -config ssl.conf -new -nodes -key {{ root_ca_name }}.key -sha256 -days {{ certificate_length }} -out {{ root_ca_name }}.crt"
   args:
     chdir: "{{ certificate_directory }}"
     creates: "{{ root_ca_name }}.crt"
 
 # openssl genrsa -out {{ certificate_name }}.key 2048
 - name: Create a RSA Private Key {{ certificate_name }}.key
-  shell: "openssl genrsa -out {{ certificate_name }}.key 2048"
+  ansible.builtin.shell: "openssl genrsa -out {{ certificate_name }}.key 2048"
   args:
     chdir: "{{ certificate_directory }}"
     creates: "{{ certificate_name }}.key"
 
 # openssl req -sha512 -new -key {{ certificate_name }}.key -out {{ certificate_name }}.csr -config ssl.conf
 - name: Create a Certificate Signing Request {{ certificate_name }}.csr
-  shell: "openssl req -config ssl.conf -sha512 -new -key {{ certificate_name }}.key -out {{ certificate_name }}.csr"
+  ansible.builtin.shell: "openssl req -config ssl.conf -sha512 -new -key {{ certificate_name }}.key -out {{ certificate_name }}.csr"
   args:
     chdir: "{{ certificate_directory }}"
     creates: "{{ certificate_name }}.csr"
 
 # openssl x509 -in {{ root_ca_name }}.crt -text -noout -serial | grep 'serial' >> secret/serial
 - name: Create a serial File
-  shell: "openssl x509 -in {{ root_ca_name }}.crt -text -noout -serial | grep 'serial' >> serial"
+  ansible.builtin.shell: "openssl x509 -in {{ root_ca_name }}.crt -text -noout -serial | grep 'serial' >> serial"
   args:
     chdir: "{{ certificate_directory }}"
     creates: "serial"
 
 # sed -i -e 's/serial=//g' secret/serial
 - name: Format serial File
-  replace:
+  ansible.builtin.replace:
     path: "{{ certificate_directory }}/serial"
     regexp: 'serial='
     replace: ''
 
 # openssl x509 -days 3650 -req -sha512 -in {{ certificate_name }}.csr -CAserial serial -CA {{ root_ca_name }}.crt -CAkey {{ root_ca_name }}.key -out {{ certificate_name }}.crt -extfile ssl.conf
 - name: Create Star Cert {{ certificate_name }}.crt
-  shell: "openssl x509 -days 3650 -req -sha512 -in {{ certificate_name }}.csr -CAserial serial -CA {{ root_ca_name }}.crt -CAkey {{ root_ca_name }}.key -out {{ certificate_name }}.crt -extfile ssl.conf"
+  ansible.builtin.shell: "openssl x509 -days 3650 -req -sha512 -in {{ certificate_name }}.csr -CAserial serial -CA {{ root_ca_name }}.crt -CAkey {{ root_ca_name }}.key -out {{ certificate_name }}.crt -extfile ssl.conf"
   args:
     chdir: "{{ certificate_directory }}"
     creates: "{{ certificate_name }}.crt"
 
 - name: Set Permissions on Files
-  file:
+  ansible.builtin.file:
     path: "{{ certificate_directory }}/{{ item }}"
     owner: "{{ certificate_owner }}"
     group: "{{ certificate_group }}"
@@ -85,7 +85,7 @@
     - ssl.conf
 
 - name: Set Permissions on Files
-  file:
+  ansible.builtin.file:
     path: "{{ certificate_directory }}/{{ item }}"
     mode: 0644
   loop:
