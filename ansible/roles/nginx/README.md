@@ -34,7 +34,7 @@ A simple role to install nginx as a proxy
           }
 ```
 
-# Additional Proxy Options
+## Additional Proxy Options
 
 * custom_additions - appended to end of server block, defaults to null, not included by default
 * grpc - is this a grpc proxy, defaults to false.
