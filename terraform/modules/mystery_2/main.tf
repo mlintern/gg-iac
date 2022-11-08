@@ -61,10 +61,10 @@ resource "aws_s3_bucket_policy" "this" {
       {
         "Sid" : "S3BucketAllow",
         "Effect" : "Allow",
-        "Principal" : "${var.bucket_access_principal}",
-        "Action" : "${var.bucket_access_action}",
+        "Principal" : var.bucket_access_principal,
+        "Action" : var.bucket_access_action,
         "Resource" : [
-          "${aws_s3_bucket.this.arn}",
+          aws_s3_bucket.this.arn,
           "${aws_s3_bucket.this.arn}/*"
         ]
       },
@@ -74,7 +74,7 @@ resource "aws_s3_bucket_policy" "this" {
         "Action" : ["s3:*"],
         "Principal" : "*",
         "Resource" : [
-          "${aws_s3_bucket.this.arn}",
+          aws_s3_bucket.this.arn,
           "${aws_s3_bucket.this.arn}/*"
         ],
         "Condition" : {
@@ -90,5 +90,3 @@ resource "aws_s3_bucket_policy" "this" {
     aws_s3_bucket.this,
   ]
 }
-
-data "aws_caller_identity" "current" {}

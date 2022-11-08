@@ -1,12 +1,11 @@
 # Hosts Management
 
-=========
-
 This role manages /etc/hosts and /etc/hostname. The files are managed with a
 template.
 
 ## Role Variables
---------------
+
+---
 
 Each entry is described by a dictionary with the keys "address" which contains
 the IP address for the entry and "hosts" which is a list of hostnames. The host
@@ -31,7 +30,8 @@ hosts_all_hosts: List of all host entries. Just merges hosts_default_hosts and
 hosts_additional_hosts by default.
 
 ## Example Playbook
-----------------
+
+---
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
@@ -49,4 +49,4 @@ Including an example of how to use your role (for instance, with variables passe
               - server
 ```
 
-Original Source: https://github.com/ajsalminen/ansible-role-hosts
+Original Source: [https://github.com/ajsalminen/ansible-role-hosts](https://github.com/ajsalminen/ansible-role-hosts)
