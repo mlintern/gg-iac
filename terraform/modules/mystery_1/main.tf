@@ -6,6 +6,7 @@ resource "aws_instance" "this" {
   vpc_security_group_ids  = var.vpc_security_group_ids
   subnet_id               = var.subnet_id
   iam_instance_profile    = var.profile
+  monitoring              = true
 
   root_block_device {
     volume_size = 32
